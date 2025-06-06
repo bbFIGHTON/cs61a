@@ -227,7 +227,33 @@ def furry_fixes(typed, source, limit):
     5
     """
     # BEGIN PROBLEM 6
-    assert False, 'Remove this line'
+    '''
+    length = min(len(typed), len(source))
+    length_diff = max(len(typed), len(source))-length
+    if typed == source:
+        return 0
+    elif len(typed) != len(source):
+        return furry_fixes(typed[:length], source[:length], limit) + length_diff
+    elif len(typed) == 1 and typed != source:
+        return 1
+    else:
+        return furry_fixes(typed[:1], source[:1], limit) + furry_fixes(typed[1:], source[1:], limit)
+    '''
+    def counting(str1, str2, diff):
+        length = min(len(str1), len(str2))
+        length_diff = max(len(str1), len(str2))-length
+        if diff > limit:
+            return limit + 1
+        elif len(str1) == 0 and len(str2) == 0:
+            return diff
+        elif len(str1) != len(str2):    
+            return counting(str1[:length], str2[:length], diff + length_diff)
+        elif str1 and str2:         #to avoid outOfBounds index error. str1 and str2 have characters
+            if str1[0] == str2[0]:
+                return counting(str1[1:], str2[1:], diff)
+            else:
+                return counting(str1[1:], str2[1:], diff + 1)
+    return counting(typed, source, 0)
     # END PROBLEM 6
 
 
