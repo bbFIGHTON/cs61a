@@ -335,6 +335,19 @@ def report_progress(typed, source, user_id, upload):
     """
     # BEGIN PROBLEM 8
     "*** YOUR CODE HERE ***"
+    progress = 0
+    for i in range(len(typed)):
+        if typed[i] == source[i]:
+            progress += 1
+        else:
+            break
+    progress /= len(source)
+    message = {
+        'id': user_id,
+        'progress':progress
+    }
+    upload(message)
+    print(message['progress'])
     # END PROBLEM 8
 
 
@@ -359,6 +372,10 @@ def time_per_word(words, timestamps_per_player):
     tpp = timestamps_per_player  # A shorter name (for convenience)
     # BEGIN PROBLEM 9
     times = []  # You may remove this line
+
+    for timestamps in tpp:
+        tpp = [(timestamps[i+1] - timestamps[i]) for i in range(len(words))]
+        times.append(tpp)
     # END PROBLEM 9
     return {'words': words, 'times': times}
 
@@ -368,8 +385,8 @@ def fastest_words(words_and_times):
 
     Arguments:
         words_and_times: a dictionary {'words': words, 'times': times} where
-        words is a list of the words typed and times is a list of lists of times
-        spent by each player typing each word.
+        words is a list of the words typed 
+        times is a list of lists of times spent by each player typing each word.
 
     >>> p0 = [5, 1, 3]
     >>> p1 = [4, 1, 6]
@@ -386,6 +403,16 @@ def fastest_words(words_and_times):
     word_indices = range(len(words))    # contains an *index* for each word
     # BEGIN PROBLEM 10
     "*** YOUR CODE HERE ***"
+    fastest_words_list = [[] for i in player_indices]
+    for word_index in word_indices:
+        fastest_player = 0
+        fast_of_word = times[0][word_index]
+        for player_index in player_indices:            
+            if fast_of_word > times[player_index][word_index]:
+                fastest_player = player_index
+                fast_of_word = times[fastest_player][word_index]
+        fastest_words_list[fastest_player] += [words[word_index]]
+    return fastest_words_list
     # END PROBLEM 10
 
 
