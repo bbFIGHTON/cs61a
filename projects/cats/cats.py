@@ -274,24 +274,23 @@ def minimum_mewtations(typed, source, limit):
     >>> minimum_mewtations("ckiteus", "kittens", big_limit) # ckiteus -> kiteus -> kitteus -> kittens
     3
     """
-    assert False, 'Remove this line'
-    if ___________: # Base cases should go here, you may add more base cases as needed.
-        # BEGIN
-        "*** YOUR CODE HERE ***"
-        # END
-    # Recursive cases should go below here
-    if ___________: # Feel free to remove or add additional cases
-        # BEGIN
-        "*** YOUR CODE HERE ***"
-        # END
-    else:
-        add = ... # Fill in these lines
-        remove = ...
-        substitute = ...
-        # BEGIN
-        "*** YOUR CODE HERE ***"
-        # END
+    "*** YOUR CODE HERE ***"
 
+     # Base cases should go here, you may add more base cases as needed.
+    if limit < 0:
+        return 1
+    if typed == source:
+        return 0
+    if len(typed) == 0 or len(source) == 0:
+        return len(typed) + len(source)
+    # Recursive cases should go below here
+    if typed[0] == source[0]:
+        return minimum_mewtations(typed[1:],source[1:], limit)
+    else:
+        add = 1 + minimum_mewtations(typed, source[1:], limit - 1)
+        remove = 1 + minimum_mewtations(typed[1:], source, limit - 1)
+        substitute = 1 + minimum_mewtations(typed[1:],source[1:], limit - 1)
+        return min(add, remove, substitute)
 
 # Ignore the line below
 minimum_mewtations = count(minimum_mewtations)
