@@ -62,13 +62,13 @@ def planet(mass):
     """Construct a planet of some mass."""
     assert mass > 0
     "*** YOUR CODE HERE ***"
-    return ['planet'] + [mass]
+    return ['planet', mass]
 
 def mass(p):
     """Select the mass of a planet."""
     assert is_planet(p), 'must call mass on a planet'
     "*** YOUR CODE HERE ***"
-    return planet[1]
+    return p[1]
 
 def is_planet(p):
     """Whether p is a planet."""
@@ -121,6 +121,20 @@ def balanced(m):
     True
     """
     "*** YOUR CODE HERE ***"
+    if is_planet(m):
+        return True
+    elif is_mobile(m):
+        left_end, right_end = end(left(m)), end(right(m))
+        torque_left = length(left(m)) * total_mass(left_end)
+        torque_right = length(right(m)) * total_mass(right_end)
+        return torque_left == torque_right and balanced(left_end) and balanced(right_end)
+
+        '''
+        if not balanced(end(left(m))) or not balanced(end(right(m))):
+            return False
+        else:
+            return length(left(m)) * total_mass(end(left(m))) == length(right(m)) * total_mass(end(right(m)))
+        '''
 
 
 def berry_finder(t):
