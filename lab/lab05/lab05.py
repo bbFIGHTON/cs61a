@@ -107,7 +107,31 @@ def repeated(t, k):
     """
     assert k > 1
     "*** YOUR CODE HERE ***"
-
+    '''
+    prev = next(t)
+    curr = next(t)
+    
+    for _ in range(len(list(t))-1):
+        
+        count = 0
+        while curr == prev:
+            count += 1
+            if count == k:
+                return prev
+            curr = next(t)
+        prev = curr
+    '''
+    count = 0
+    last_item = None
+    while True:
+        item = next(t)
+        if item == last_item:
+            count += 1
+        else:
+            last_item = item
+            count = 1
+        if count == k:
+            return item
 
 def sprout_leaves(t, leaves):
     """Sprout new leaves containing the labels in leaves at each leaf of
