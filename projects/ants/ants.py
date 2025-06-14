@@ -167,6 +167,9 @@ class ThrowerAnt(Ant):
     # ADD/OVERRIDE CLASS ATTRIBUTES HERE
     food_cost = 3
 
+    lower_bound = 0
+    upper_bound = float('inf')
+
     def nearest_bee(self):
         """Return the nearest Bee in a Place (that is not the hive) connected to
         the ThrowerAnt's Place by following entrances.
@@ -175,11 +178,19 @@ class ThrowerAnt(Ant):
         """
         # BEGIN Problem 3 and 4
         place = self.place
-        while place.entrance is not None:
+        step = 0
+        if self.lower_bound > 0:
+            for _ in range(self.lower_bound):
+                # Testing case when lower_bound of LongThrower is outside of the tunnel
+                if place.entrance is not None:
+                    place = place.entrance
+                    step += 1
+        while step <= self.upper_bound and place.entrance is not None:
             if place.bees == []:
                 place = place.entrance
             else:
-                return random_bee(place.bees) 
+                return random_bee(place.bees)
+            step += 1
         return None
         # END Problem 3 and 4
 
@@ -211,8 +222,9 @@ class ShortThrower(ThrowerAnt):
     name = 'Short'
     food_cost = 2
     # OVERRIDE CLASS ATTRIBUTES HERE
+    upper_bound = 3
     # BEGIN Problem 4
-    implemented = False   # Change to True to view in the GUI
+    implemented = True   # Change to True to view in the GUI
     # END Problem 4
 
 
@@ -222,8 +234,9 @@ class LongThrower(ThrowerAnt):
     name = 'Long'
     food_cost = 2
     # OVERRIDE CLASS ATTRIBUTES HERE
+    lower_bound = 5
     # BEGIN Problem 4
-    implemented = False   # Change to True to view in the GUI
+    implemented = True   # Change to True to view in the GUI
     # END Problem 4
 
 
