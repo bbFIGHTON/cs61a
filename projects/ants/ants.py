@@ -343,7 +343,7 @@ class ContainerAnt(Ant):
     def can_contain(self, other):
         # BEGIN Problem 8a
         "*** YOUR CODE HERE ***"
-        if self.ant_contained == None and other.is_container == False:
+        if self.ant_contained is None and other.is_container is False:
             return True
         else:
             return False
@@ -395,6 +395,25 @@ class BodyguardAnt(ContainerAnt):
 
 # BEGIN Problem 9
 # The TankAnt class
+class TankAnt(ContainerAnt):
+    """TankAnt is a ContainerAnt that protects an ant in its place and also deals 1 damage to all bees in its place each turn"""
+    
+    name = 'Tank'
+    food_cost = 6
+    implemented = True
+
+    damage = 1
+
+    def __init__(self, health = 2):
+        super().__init__(health)
+
+    def action(self, gamestate):
+        tmp_place = self.place
+        if tmp_place.bees:
+            for bee in list(tmp_place.bees):
+                bee.reduce_health(self.damage)
+        return super().action(gamestate)
+
 # END Problem 9
 
 
