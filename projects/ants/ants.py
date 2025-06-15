@@ -102,6 +102,7 @@ class Ant(Insect):
     food_cost = 0
     is_container = False
     # ADD CLASS ATTRIBUTES HERE
+    is_double = False
 
     def __init__(self, health=1):
         super().__init__(health)
@@ -146,6 +147,9 @@ class Ant(Insect):
         """Double this ants's damage, if it has not already been doubled."""
         # BEGIN Problem 12
         "*** YOUR CODE HERE ***"
+        if self.is_double == False:
+            self.damage *= 2
+            self.is_double = True 
         # END Problem 12
 
 
@@ -453,6 +457,9 @@ class QueenAnt(ThrowerAnt):
     # BEGIN Problem 12
     implemented = False   # Change to True to view in the GUI
     # END Problem 12
+
+    def __init__(self, health=1):
+        super().__init__(health)
 
     def action(self, gamestate):
         """A queen ant throws a leaf, but also doubles the damage of ants
