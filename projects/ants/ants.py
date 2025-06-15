@@ -283,7 +283,7 @@ class FireAnt(Ant):
 # The WallAnt class
 class WallAnt(Ant):
     """A WallAnt is useful because it has a large health value"""
-    
+
     name = 'Wall'
     implemented = True
     food_cost = 4
@@ -294,6 +294,30 @@ class WallAnt(Ant):
 
 # BEGIN Problem 7
 # The HungryAnt Class
+class HungryAnt(Ant):
+    # the HungryAnt, which will eat a random Bee in its place by reducing the Bee's health to 0
+    # must spend 3 turns chewing before being able to eat again.
+    # If there is no bee in its place available to eat, the HungryAnt will do nothing.
+    name = 'Hungry'
+    implemented = True
+
+    food_cost = 4
+
+    # Attribute stores the number of turns that it will take a HungryAnt to chew
+    chew_cooldown = 3 
+
+    def __init__(self, health=1):
+        super().__init__(health)
+        self.cooldown = 0
+
+    def action(self, gamestate):
+        if self.cooldown > 0:
+            self.cooldown -= 1
+        else:
+            chewing_bee = random_bee(self.place.bees)
+            if chewing_bee:
+                chewing_bee.reduce_health(chewing_bee.health)
+                self.cooldown = self.chew_cooldown
 # END Problem 7
 
 
