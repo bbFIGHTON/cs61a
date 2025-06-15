@@ -147,7 +147,7 @@ class Ant(Insect):
         """Double this ants's damage, if it has not already been doubled."""
         # BEGIN Problem 12
         "*** YOUR CODE HERE ***"
-        if self.is_double == False:
+        if self.is_double is False:
             self.damage *= 2
             self.is_double = True 
         # END Problem 12
