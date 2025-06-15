@@ -149,7 +149,7 @@ class Ant(Insect):
         "*** YOUR CODE HERE ***"
         if self.is_double is False:
             self.damage *= 2
-            self.is_double = True 
+            self.is_double = True
         # END Problem 12
 
 
@@ -467,6 +467,17 @@ class QueenAnt(ThrowerAnt):
         """
         # BEGIN Problem 12
         "*** YOUR CODE HERE ***"
+        super().action(gamestate)
+                
+        # Inspire the ants behind the QueenAnt
+
+        behind_place = self.place.exit
+        while behind_place is not None:
+            if behind_place.ant is not None:
+                if behind_place.ant.is_container == True and behind_place.ant.ant_contained != None:
+                    behind_place.ant.ant_contained.double()
+                behind_place.ant.double()
+            behind_place = behind_place.exit
         # END Problem 12
 
     def reduce_health(self, amount):
