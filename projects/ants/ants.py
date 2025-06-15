@@ -268,7 +268,7 @@ class FireAnt(Ant):
         tmp_place = self.place
 
         # self.health -= amount
-        super().reduce_health(amount)
+        super().reduce_health(amount) 
 
         total_amount = amount
         if self.health <= 0:
@@ -281,6 +281,15 @@ class FireAnt(Ant):
 
 # BEGIN Problem 6
 # The WallAnt class
+class WallAnt(Ant):
+    """A WallAnt is useful because it has a large health value"""
+    
+    name = 'Wall'
+    implemented = True
+    food_cost = 4
+
+    def __init__(self, health=4):
+        super().__init__(health)
 # END Problem 6
 
 # BEGIN Problem 7
