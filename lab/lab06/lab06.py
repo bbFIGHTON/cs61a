@@ -206,6 +206,7 @@ class Mint:
 
     def update(self):
         "*** YOUR CODE HERE ***"
+        self.year = present_year
 
 class Coin:
     cents = None # will be provided by subclasses, but not by Coin itself
