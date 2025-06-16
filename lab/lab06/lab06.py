@@ -72,16 +72,24 @@ class BankAccount:
     """
 
     # *** YOU NEED TO MAKE CHANGES IN SEVERAL PLACES IN THIS CLASS ***
+    
 
     def __init__(self, account_holder):
         self.balance = 0
         self.holder = account_holder
+        self.transactions = []
+
+    def next_id(self):
+        print("DEBUG:len",len(self.transactions))
+        return len(self.transactions)
 
     def deposit(self, amount):
         """Increase the account balance by amount, add the deposit
         to the transaction history, and return the new balance.
         """
+        before = self.balance
         self.balance = self.balance + amount
+        self.transactions.append(Transaction(self.next_id(), before, self.balance))
         return self.balance
 
     def withdraw(self, amount):
@@ -90,7 +98,9 @@ class BankAccount:
         """
         if amount > self.balance:
             return 'Insufficient funds'
+        before = self.balance
         self.balance = self.balance - amount
+        self.transactions.append(Transaction(self.next_id(), before, self.balance))
         return self.balance
 
 
