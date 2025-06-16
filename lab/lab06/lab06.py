@@ -217,6 +217,9 @@ class Coin:
 
     def worth(self):
         "*** YOUR CODE HERE ***"
+        if Mint.present_year - self.year > 50:
+            return self.cents + Mint.present_year - self.year - 50
+        return self.cents
 
 class Nickel(Coin):
     cents = 5
