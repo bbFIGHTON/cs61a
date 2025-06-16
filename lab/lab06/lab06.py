@@ -27,9 +27,9 @@ class Transaction:
             "*** YOUR CODE HERE ***"
             msg = str(self.before) + '->' + str(self.after)
             if self.before < self.after:
-                return str(self.id) + ': increased' + msg
+                return str(self.id) + ': increased ' + msg
             else:
-                return str(self.id) + ': decreased' + msg
+                return str(self.id) + ': decreased ' + msg
         return str(self.id) + ': ' + msg
 
 class BankAccount:
@@ -96,12 +96,14 @@ class BankAccount:
         """Decrease the account balance by amount, add the withdraw
         to the transaction history, and return the new balance.
         """
-        if amount > self.balance:
-            return 'Insufficient funds'
         before = self.balance
-        self.balance = self.balance - amount
-        self.transactions.append(Transaction(self.next_id(), before, self.balance))
-        return self.balance
+        if amount > self.balance:
+            self.transactions.append(Transaction(self.next_id(), before, self.balance))
+            return 'Insufficient funds'
+        else:
+            self.balance = self.balance - amount
+            self.transactions.append(Transaction(self.next_id(), before, self.balance))
+            return self.balance
 
 
 class Email:
