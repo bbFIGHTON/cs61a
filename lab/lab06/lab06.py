@@ -203,10 +203,11 @@ class Mint:
 
     def create(self, coin):
         "*** YOUR CODE HERE ***"
+        return coin(self.year)
 
     def update(self):
         "*** YOUR CODE HERE ***"
-        self.year = present_year
+        self.year = self.present_year
 
 class Coin:
     cents = None # will be provided by subclasses, but not by Coin itself
