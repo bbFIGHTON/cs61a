@@ -7,6 +7,10 @@ class Transaction:
     def changed(self):
         """Return whether the transaction resulted in a changed balance."""
         "*** YOUR CODE HERE ***"
+        if self.before != self.after:
+            return True
+        else:
+            return False
 
     def report(self):
         """Return a string describing the transaction.
