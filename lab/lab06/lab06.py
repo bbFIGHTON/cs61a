@@ -25,6 +25,11 @@ class Transaction:
         msg = 'no change'
         if self.changed():
             "*** YOUR CODE HERE ***"
+            msg = str(self.before) + '->' + str(self.after)
+            if self.before < self.after:
+                return str(self.id) + ': increased' + msg
+            else:
+                return str(self.id) + ': decreased' + msg
         return str(self.id) + ': ' + msg
 
 class BankAccount:
