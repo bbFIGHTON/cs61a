@@ -134,6 +134,11 @@ def store_digits(n):
     """
     "*** YOUR CODE HERE ***"
 
+    link = Link.empty
+    while n != 0:
+        link, n = Link(n % 10, link), n // 10
+    return link
+
 
 def deep_map_mut(func, s):
     """Mutates a deep link s by replacing each item found with the
