@@ -40,7 +40,15 @@ class Account:
         """Return the number of years until balance would grow to amount."""
         assert self.balance > 0 and amount > 0 and self.interest > 0
         "*** YOUR CODE HERE ***"
-
+        current_balance = self.balance
+        years = 0
+        
+        while current_balance < amount:
+            years += 1
+            current_balance = self.balance * pow((1 + self.interest), years)
+            
+        return years
+             
 
 class FreeChecking(Account):
     """A bank account that charges for withdrawals, but the first two are free!
