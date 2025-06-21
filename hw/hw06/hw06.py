@@ -160,6 +160,20 @@ def deep_map_mut(func, s):
     <9 <16> 25 36>
     """
     "*** YOUR CODE HERE ***"
+    
+    """while isinstance(s, Link):
+        if isinstance(s.first, int):
+            s.first = func(s.first)
+        else:
+            s.first.first = func(s.first.first)
+        s = s.rest
+    """
+    if isinstance(s, Link):
+        if isinstance(s.first, Link):
+            s.first, s.rest = deep_map_mut(func, s.first), deep_map_mut(func, s.rest)
+        elif isinstance(s.first, int):
+            s.first, s.rest = func(s.first), deep_map_mut(func, s.rest)
+    return s
 
 
 def two_list(vals, counts):
