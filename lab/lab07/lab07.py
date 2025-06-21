@@ -46,7 +46,7 @@ class Account:
         while current_balance < amount:
             years += 1
             current_balance = self.balance * pow((1 + self.interest), years)
-            
+
         return years
              
 
@@ -79,6 +79,15 @@ class FreeChecking(Account):
 
     "*** YOUR CODE HERE ***"
 
+    def withdraw(self, amount):
+        if self.free_withdrawals > 0:
+            self.free_withdrawals -= 1
+            return super().withdraw(amount)
+        else:
+            amount += self.withdraw_fee
+            self.free_withdrawals -= 1
+            return super().withdraw(amount)
+        
 
 def without(s, i):
     """Return a new linked list like s but without the element at index i.
