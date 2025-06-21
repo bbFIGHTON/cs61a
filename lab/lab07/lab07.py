@@ -103,6 +103,12 @@ def without(s, i):
     True
     """
     "*** YOUR CODE HERE ***"
+        
+    if s is Link.empty:
+        return Link.empty
+    if i == 0:
+        return s.rest
+    return Link(s.first, without(s.rest, i - 1))
 
 
 def duplicate_link(s, val):
