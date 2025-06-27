@@ -5,7 +5,10 @@
     (else 1))
 )
 
-(define (make-adder num) 'YOUR-CODE-HERE)
+(define (make-adder num) 
+  'YOUR-CODE-HERE
+  (lambda (inc) (+ num inc)) 
+)
 
 (define (composed f g) 'YOUR-CODE-HERE)
 
