@@ -13,6 +13,11 @@ def cumulative_mul(t):
     """
     "*** YOUR CODE HERE ***"
 
+    # process from leaf to root
+    for b in t.branches:
+        cumulative_mul(b)
+        t.label *= b.label
+
 
 def prune_small(t, n):
     """Prune the tree mutatively, keeping only the n branches
