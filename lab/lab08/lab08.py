@@ -81,7 +81,10 @@ def max_path_sum(t):
     11
     """
     "*** YOUR CODE HERE ***"
-
+    if t.is_leaf():
+        return t.label
+    
+    return max((max_path_sum(bs) + t.label) for bs in t.branches)
 
 class Tree:
     """A tree has a label and a list of branches.
