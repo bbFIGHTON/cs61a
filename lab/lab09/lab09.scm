@@ -10,7 +10,10 @@
   (lambda (inc) (+ num inc)) 
 )
 
-(define (composed f g) 'YOUR-CODE-HERE)
+(define (composed f g) 
+  'YOUR-CODE-HERE
+  (lambda (x) (f (g x)))
+)
 
 (define (repeat f n) 'YOUR-CODE-HERE)
 
