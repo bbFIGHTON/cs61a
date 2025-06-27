@@ -2,7 +2,7 @@
   'YOUR-CODE-HERE
   (cond ((< num1 num2) -1)
     ((= num1 num2) 0)
-    (else 1))
+    (else 1)) ;((> num1 num2) 1)
 )
 
 (define (make-adder num) 
@@ -15,7 +15,14 @@
   (lambda (x) (f (g x)))
 )
 
-(define (repeat f n) 'YOUR-CODE-HERE)
+(define (repeat f n) 
+  'YOUR-CODE-HERE
+  (if (< n 1)
+  ;  ((lambda (x) (f x)))
+  ;  ((repeat f (- n 1)x)))
+    (lambda (x) x)
+    (composed f (repeat f (- n 1))))
+)
 
 (define (max a b)
   (if (> a b)
