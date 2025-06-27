@@ -37,7 +37,7 @@
 (define (gcd a b) 
   'YOUR-CODE-HERE
   (if (zero? (modulo a b))
-    (b) ; True
+    b ; True
     (gcd b (modulo a b))) ; Else
   ;  (cond ((zero? a) b)
   ;      ((zero? b) a)
