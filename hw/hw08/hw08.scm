@@ -7,7 +7,10 @@
 )
 
 (define (my-filter pred s) 
-    )
+    (cond 
+        ((null? s) nil)
+        ((pred (car s)) (cons (car s) (my-filter pred (cdr s))))
+        (else (my-filter pred (cdr s)))))
 
 (define (interleave lst1 lst2) 
     (cond 
