@@ -21,13 +21,14 @@ def calc_eval(exp):
         elif operator == 'define': # define expressions
             return eval_define(operands)
         else: # Call expressions
-            return calc_apply(calc_eval(operator), operands.map(calc_eval)) # UPDATE THIS FOR Q2, what is type(operator)?
+            return calc_apply(calc_eval(operator), operands.map(calc_eval)) 
+            # UPDATE THIS FOR Q2, what is type(operator)?
     elif exp in OPERATORS:   # Looking up procedures
         return OPERATORS[exp]
     elif isinstance(exp, int) or isinstance(exp, bool):   # Numbers and booleans
         return exp
-    elif _________________: # CHANGE THIS CONDITION FOR Q4 where are variables stored?
-        return _________________ # UPDATE THIS FOR Q4, how do you access a variable?
+    elif exp in bindings: # CHANGE THIS CONDITION FOR Q4 where are variables stored?
+        return bindings[exp] # UPDATE THIS FOR Q4, how do you access a variable?
 
 def calc_apply(op, args):
     return op(args)
@@ -82,6 +83,21 @@ def eval_and(expressions):
     True
     """
     "*** YOUR CODE HERE ***"
+    '''
+    val, sub = expressions.first, expressions.rest
+    while val is not scheme_f and sub is not nil:
+        val = sub.first
+        sub = sub.rest
+    '''
+    curr = expressions
+    val = True
+    while curr is  not nil:
+        val = calc_eval(curr.first)
+        if val is scheme_f:
+            return val
+        curr = curr.rest
+    return val
+
 
 bindings = {}
 
@@ -101,6 +117,9 @@ def eval_define(expressions):
     2
     """
     "*** YOUR CODE HERE ***"
+    symbol, val = expressions.first, calc_eval(expressions.rest.first)
+    bindings[symbol] = val
+    return symbol
 
 OPERATORS = { "//": floor_div, "+": addition, "-": subtraction, "*": multiplication, "/": division }
 
@@ -147,7 +166,7 @@ class Pair:
         return self.first == p.first and self.rest == p.rest
 
     def map(self, fn):
-        """Return a Scheme list after mapping Python function FN to SELF."""
+        """Return a Scheme list after mapping Python function FN to each element of SELF."""
         mapped = fn(self.first)
         if self.rest is nil or isinstance(self.rest, Pair):
             return Pair(mapped, self.rest.map(fn))
